@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import ClientShowcase, ContactSettings, TeamMember
+from .models import ClientShowcase, ContactSettings, TeamMember, ClinicService
 
 
 @admin.register(ClientShowcase)
@@ -43,3 +43,18 @@ class ContactSettingsAdmin(admin.ModelAdmin):
 
     def has_delete_permission(self, request, obj=None):
         return False
+
+
+@admin.register(ClinicService)
+class ClinicServiceAdmin(admin.ModelAdmin):
+    list_display = ("name", "group", "price", "price_from", "sort_order", "is_published")
+    list_filter = ("is_published", "group")
+    search_fields = ("name", "group", "summary")
+    list_editable = ("sort_order", "is_published")
+    prepopulated_fields = {"slug": ("name",)}
+    fieldsets = (
+        (None, {"fields": ("name", "slug", "group", "summary")}),
+        ("Стоимость", {"fields": ("price", "price_from", "price_note")}),
+        ("Подробности", {"fields": ("description", "preparation"), "classes": ("collapse",)}),
+        ("Публикация", {"fields": ("sort_order", "is_published")}),
+    )

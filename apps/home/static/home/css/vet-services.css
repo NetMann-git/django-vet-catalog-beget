@@ -1,0 +1,20 @@
+/* шаг 6: услуги клиники, без изменения каталога изделий. */
+.vs-main{min-height:55vh;box-sizing:border-box}.vs-main *{box-sizing:border-box}
+.vs-page{padding-block:30px 80px}.vs-breadcrumbs{display:flex;gap:12px;flex-wrap:wrap;font-size:13px;color:#657067;margin-bottom:35px}
+.vs-main :focus-visible{outline:3px solid #77739b;outline-offset:4px}
+.vs-heading{display:flex;justify-content:space-between;align-items:center;gap:35px;margin-bottom:40px}
+.vs-heading h1{font-size:clamp(38px,4vw,58px)}.vs-heading p{font-size:17px}.vs-heading .vh-button{flex-shrink:0}
+.vs-filters{display:flex;align-items:flex-end;gap:18px;padding:24px;background:#eef2e8;border-radius:14px;margin-bottom:20px;flex-wrap:wrap}
+.vs-filters>div:first-child{flex:2;min-width:220px}.vs-filters>div:nth-child(2){flex:1;min-width:200px}
+.vs-filters label{display:block;font-size:13px;font-weight:600;margin-bottom:8px}
+.vs-filters input,.vs-filters select{display:block;width:100%;height:50px;padding:10px 12px;border:1px solid #a7b6a8;border-radius:8px;background:#fff;color:#303b36;font:16px 'Open Sans',Arial,sans-serif}
+.vs-result-count{font-size:14px;color:#566458}.vs-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;margin-top:28px}
+.vs-card{display:flex;flex-direction:column;justify-content:space-between;gap:22px;border:1px solid #dfdfd7;border-radius:16px;padding:28px;background:#fffdf9;min-width:0;overflow-wrap:anywhere}
+.vs-card h2{font-size:28px;line-height:1.25}.vs-card .vh-eyebrow{margin-bottom:12px}
+.vs-summary{font-size:15px;line-height:1.85}.vs-card-bottom{border-top:1px solid #e6e3e7;padding-top:8px}
+.vs-card .vs-price{color:#294a3d;font-size:21px;font-weight:600;line-height:1.5;margin-bottom:8px}.vs-card .vs-price-note{font-size:13px;line-height:1.7;margin:8px 0;color:#5e685f}
+.vs-card .vh-text-link{font-size:14px;min-height:44px}.vs-empty{padding:60px 30px;text-align:center;background:linear-gradient(115deg,#eef2e8,#faf8f3,#f2edf5);border-radius:20px}
+.vs-empty h2{font-size:36px}.vs-empty p{font-size:17px}.vs-empty .vh-button{margin-top:12px}
+.vs-pagination{display:flex;align-items:center;justify-content:center;gap:24px;flex-wrap:wrap;margin-top:35px;font-size:15px}.vs-pagination a{min-height:44px;display:inline-flex;align-items:center}
+@media(max-width:1000px){.vs-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.vs-heading{align-items:flex-start;flex-direction:column;gap:10px}}
+@media(max-width:620px){.vs-page{padding-block:22px 45px}.vs-breadcrumbs{margin-bottom:28px}.vs-filters{display:grid;grid-template-columns:1fr;padding:18px;gap:14px}.vs-filters>div:first-child,.vs-filters>div:nth-child(2){min-width:0}.vs-grid{grid-template-columns:1fr;gap:18px}.vs-card{padding:24px}.vs-empty{padding:35px 20px}.vs-empty h2{font-size:30px}.vs-heading h1{font-size:40px}}

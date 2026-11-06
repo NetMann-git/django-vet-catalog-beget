@@ -1,4 +1,5 @@
 from django.db import models
+from django.core.validators import MinValueValidator
 
 
 class ClientShowcase(models.Model):
@@ -128,3 +129,29 @@ class ContactSettings(models.Model):
 
     def __str__(self):
         return "Контакты главной страницы"
+
+
+class ClinicService(models.Model):
+    """Услуга клиники; отдельна от унаследованных товаров каталога."""
+    name = models.CharField("Название услуги", max_length=180)
+    slug = models.SlugField("Адресное имя", max_length=180, unique=True, allow_unicode=True)
+    group = models.CharField("Направление", max_length=120, blank=True, db_index=True)
+    summary = models.TextField("Краткое описание", blank=True)
+    description = models.TextField("Описание", blank=True)
+    preparation = models.TextField("Подготовка к визиту", blank=True)
+    price = models.DecimalField("Стоимость, ₽", max_digits=10, decimal_places=2,
+                                null=True, blank=True, validators=[MinValueValidator(0)])
+    price_from = models.BooleanField("Стоимость от указанной суммы", default=False)
+    price_note = models.CharField("Пояснение к стоимости", max_length=250, blank=True)
+    sort_order = models.PositiveIntegerField("Порядок вывода", default=100, db_index=True)
+    is_published = models.BooleanField("Опубликовано", default=False, db_index=True)
+    created_at = models.DateTimeField("Создано", auto_now_add=True)
+    updated_at = models.DateTimeField("Изменено", auto_now=True)
+
+    class Meta:
+        ordering = ("sort_order", "name", "pk")
+        verbose_name = "Услуга клиники"
+        verbose_name_plural = "Услуги клиники"
+
+    def __str__(self):
+        return self.name

@@ -11,8 +11,8 @@ def home(request):
 
 
 def services(request):
-    from .services_content import SERVICE_GROUPS
-    return render(request, "home/services.html", {"service_groups": SERVICE_GROUPS})
+    from .service_catalog import service_context
+    return render(request, "home/services.html", service_context(request))
 
 
 def materials(request):

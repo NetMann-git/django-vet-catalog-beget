@@ -1,0 +1,8 @@
+{% extends 'base.html' %}{% load static %}
+{% block title %}ВетАссист — ветеринарная клиника{% endblock %}{% block title_suffix %}{% endblock %}
+{% block body_class %}vet-home vet-inner{% endblock %}{% block body_theme_class %}{% endblock %}
+{% block global_css %}<link rel="stylesheet" href="{% static 'home/css/vet-home.css' %}"><link rel="stylesheet" href="{% static 'home/css/vet-services.css' %}">{% endblock %}
+{% block legacy_card_css %}{% endblock %}
+{% block site_shell %}<a class="vh-skip" href="#vs-main" data-help="Пропустить шапку и перейти к содержимому страницы.">Перейти к содержимому</a>{% include 'home/includes/vet_header.html' %}
+{% if messages %}<div class="vh-wrap vh-messages" role="status">{% for message in messages %}<p>{{ message }}</p>{% endfor %}</div>{% endif %}
+<main id="vs-main" class="vs-main">{% block vet_content %}{% endblock %}</main>{% include 'home/includes/vet_footer.html' %}{% endblock %}
