@@ -2,11 +2,11 @@
 
 from django.shortcuts import render
 
-from .context import HomeContextBuilder
+from .vet_context import VetHomeContextBuilder
 
 
 def home(request):
-    context = HomeContextBuilder.build(request)
+    context = VetHomeContextBuilder.build(request)
     return render(request, "home/home.html", context)
 
 
