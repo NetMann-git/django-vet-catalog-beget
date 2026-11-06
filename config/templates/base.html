@@ -11,7 +11,7 @@
             {% if page %}
                 {% if page.seo_title %}{{ page.seo_title }}{% else %}{{ page.title }}{% endif %}
             {% else %}
-                LUSTRID.RU — мебель на заказ
+                ВетАссист — ветеринарная клиника
             {% endif %}
         {% endblock %}
         {% block title_suffix %}
@@ -23,12 +23,12 @@
     {% if page and page.search_description %}
         <meta name="description" content="{{ page.search_description }}" />
     {% else %}
-        <meta name="description" content="Мебель и столярные изделия на заказ для дома и бизнеса. Индивидуальные размеры, подбор материалов и сборка." />
+        <meta name="description" content="ВетАссист — внимание к питомцу и спокойствие для вас." />
     {% endif %}
 
     <meta name="robots" content="index, follow">
-    <meta property="og:title" content="{% if page and page.seo_title %}{{ page.seo_title }}{% else %}LUSTRID.RU — мебель на заказ{% endif %}">
-    <meta property="og:description" content="{% if page and page.search_description %}{{ page.search_description }}{% else %}Мебель и столярные изделия на заказ для дома и бизнеса. Индивидуальные размеры, подбор материалов и сборка.{% endif %}">
+    <meta property="og:title" content="{% if page and page.seo_title %}{{ page.seo_title }}{% else %}ВетАссист — ветеринарная клиника{% endif %}">
+    <meta property="og:description" content="{% if page and page.search_description %}{{ page.search_description }}{% else %}ВетАссист — внимание к питомцу и спокойствие для вас.{% endif %}">
     <meta property="og:type" content="website">
     <meta property="og:url" content="{{ request.build_absolute_uri }}">
     <meta property="og:locale" content="ru_RU">
@@ -69,6 +69,8 @@
     <link rel="stylesheet" href="{% static 'home/css/site-action-help.css' %}">
     <link rel="stylesheet" href="{% static 'home/css/lustrid-brand.css' %}">
     <link rel="stylesheet" href="{% static 'home/css/lustrid-icons.css' %}">
+    <link rel="stylesheet" href="{% static 'css/fonts.css' %}">
+    <link rel="stylesheet" href="{% static 'home/css/vet-shell.css' %}">
 </head>
 
 <body class="sticky-header {% block body_class %}{% endblock %}{% block body_theme_class %} {{ current_theme }}-theme{% endblock %}">
@@ -141,5 +143,7 @@
         <script src="{% static 'appointments/js/modal_window.js' %}"></script>
     {% endblock %}
     <script src="{% static 'home/js/site-action-help.js' %}" defer></script>
+    <script src="{% static 'home/js/vet-shell.js' %}" defer></script>
+    {% if request.resolver_match.url_name == 'home' %}<script src="{% static 'search/js/search.js' %}" defer></script>{% endif %}
 </body>
 </html>

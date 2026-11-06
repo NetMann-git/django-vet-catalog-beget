@@ -1,0 +1,10 @@
+{% load vet_brand %}{% clinic_phone as va_phone %}
+<footer class="va-footer">
+<div class="va-wrap">
+<div class="va-footer-top"><div><a class="va-wordmark" href="{% url 'home' %}">ВетАссист</a><p>Ветеринарная клиника</p><p class="va-footer-motto">Внимание к питомцу и спокойствие для вас.</p></div>
+<nav aria-label="Навигация в подвале">{% include 'home/includes/vet_nav.html' %}</nav>
+<div class="va-footer-contact">{% if va_phone %}<a class="va-phone" href="{{ va_phone.url }}">{{ va_phone.text }}</a>{% else %}<a href="{% url 'furniture_contacts' %}">Контакты клиники</a>{% endif %}<a class="va-button" href="{% url 'home' %}#callback">Оставить заявку</a></div></div>
+<div class="va-footer-bottom"><small>© {% now 'Y' %} ВетАссист</small><a href="{% url 'privacy_policy' %}">Политика конфиденциальности</a><a href="{% url 'personal_data_consent' %}">Обработка персональных данных</a><a href="{% url 'public_offer' %}">Условия</a><a href="{% url 'users:dashboard' %}">Личный кабинет</a><button type="button" data-cookie-settings>Настройки cookies</button></div>
+</div>
+</footer>
+<div class="va-mobile-actions" aria-label="Быстрая связь">{% if va_phone %}<a href="{{ va_phone.url }}">Позвонить</a>{% else %}<a href="{% url 'furniture_contacts' %}">Контакты</a>{% endif %}<a class="va-button" href="{% url 'home' %}#callback">Оставить заявку</a></div>

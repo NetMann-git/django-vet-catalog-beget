@@ -1,0 +1,13 @@
+{% load static vet_brand %}{% clinic_phone as va_phone %}
+<header class="va-header" data-vet-header>
+<div class="va-wrap va-header-inner">
+<a class="va-logo" href="{% url 'home' %}" aria-label="ВетАссист — главная страница"><img src="{% static 'home/branding/vet-assist-logo.png' %}" alt="ВетАссист — ветеринарная клиника" width="1742" height="903" decoding="async"></a>
+<nav class="va-desktop-nav" aria-label="Основная навигация">{% include 'home/includes/vet_nav.html' %}</nav>
+<div class="va-header-actions">{% if va_phone %}<a class="va-phone" href="{{ va_phone.url }}">{{ va_phone.text }}</a>{% endif %}<a class="va-button va-button-outline va-desktop-book" href="{% url 'home' %}#callback">Оставить заявку</a></div>
+<details class="va-menu" data-vet-menu>
+<summary aria-label="Меню сайта"><span class="va-menu-bars" aria-hidden="true"></span><span class="va-menu-label">Меню</span></summary>
+<div class="va-menu-panel va-wrap"><nav class="va-mobile-nav" aria-label="Основная навигация на телефоне">{% include 'home/includes/vet_nav.html' %}<a class="va-button" href="{% url 'home' %}#callback">Оставить заявку</a></nav>
+{% include 'home/includes/vet_tools.html' %}</div>
+</details>
+</div>
+</header>
