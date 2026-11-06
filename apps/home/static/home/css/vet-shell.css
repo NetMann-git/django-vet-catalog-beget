@@ -1,4 +1,4 @@
-/* шаг 2: общая тёплая оболочка клиники. */
+/* шаг 3: логотип без белого прямоугольника на сливочном фоне шапки. */
 :root{--va-cream:#faf8f3;--va-forest:#294a3d;--va-sage:#eef2e8;--va-lavender:#f2edf5;--va-ginger:#bc8058;--va-text:#303b36;--va-line:#dcded5;--va-header-height:124px}
 body{background-color:var(--va-cream)}
 .va-header,.va-footer,.va-mobile-actions{font:16px/1.6 'Open Sans',Arial,sans-serif;color:var(--va-text);box-sizing:border-box}
@@ -9,8 +9,8 @@ body{background-color:var(--va-cream)}
 .va-wrap{width:min(1320px,calc(100% - 64px));margin-inline:auto}
 .va-header{position:sticky;top:0;z-index:110;background:var(--va-cream);border-bottom:1px solid var(--va-line)}
 .va-header-inner{display:flex;align-items:center;gap:26px;padding-block:15px;min-height:124px}
-.va-header .va-logo{display:block;flex:0 0 180px;line-height:0;background:#fff;border-radius:4px}
-.va-header .va-logo img{display:block;width:180px;max-width:100%;height:auto}
+.va-header .va-logo{display:block;flex:0 0 180px;line-height:0;background:transparent;border-radius:4px}
+.va-header .va-logo img{display:block;width:180px;max-width:100%;height:auto;mix-blend-mode:multiply}
 .va-desktop-nav{display:flex;align-items:center;justify-content:center;gap:26px;margin-inline:auto}
 .va-desktop-nav>a{display:flex;align-items:center;min-height:44px;font-size:16px;font-weight:600;white-space:nowrap}
 .va-header [aria-current=page]{text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:8px}
