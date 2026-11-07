@@ -124,3 +124,11 @@
         background: linear-gradient(180deg, #f4efe6, transparent 22%);
     }
 }
+
+.vh-callback-mascot {
+    display: block;
+    width: min(100%, 440px);
+    height: auto;
+    margin-top: 24px;
+    border-radius: 20px;
+}
