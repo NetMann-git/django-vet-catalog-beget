@@ -84,3 +84,43 @@
 .vh-callback{padding-block:46px}.vh-callback-grid{grid-template-columns:1fr;gap:24px}.vh-callback h2{font-size:42px}.vh-callback h2 br{display:none}.vh-form-card{padding:22px 18px}
 }
 @media(prefers-reduced-motion:no-preference){.vh-button{transition:background-color .15s}}
+
+/* Первый экран главной по согласованному макету. */
+.vh-hero {
+    width: min(1220px, calc(100% - 48px));
+    min-height: 0;
+    margin-block: 24px;
+    grid-template-columns: minmax(0, 46fr) minmax(0, 54fr);
+    background: #f4efe6;
+    border-radius: 28px;
+    overflow: hidden;
+}
+.vh-hero-copy {
+    padding: clamp(28px, 4vw, 64px);
+}
+.vh-hero-photo {
+    min-height: 390px;
+}
+.vh-hero-photo:after {
+    background: linear-gradient(90deg, #f4efe6, transparent 25%);
+}
+@media (max-width: 720px) {
+    .vh-hero {
+        width: calc(100% - 32px);
+        margin-block: 16px;
+        border-radius: 22px;
+    }
+    .vh-hero-copy {
+        order: 0;
+        padding: 28px 20px 16px;
+    }
+    .vh-hero-photo {
+        order: 1;
+        min-height: 0;
+        margin: 0;
+        aspect-ratio: 16 / 9;
+    }
+    .vh-hero-photo:after {
+        background: linear-gradient(180deg, #f4efe6, transparent 22%);
+    }
+}
