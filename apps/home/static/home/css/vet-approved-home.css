@@ -117,3 +117,30 @@
         pointer-events: none;
     }
 }
+
+#vh-main .vh-shortcuts a {
+    justify-content: center;
+    gap: 12px;
+}
+
+#vh-main .vh-shortcuts img {
+    width: 32px;
+    height: 32px;
+    object-fit: contain;
+    mix-blend-mode: multiply;
+}
+
+@media (max-width: 720px) {
+    #vh-main .vh-shortcuts a {
+        justify-content: flex-start;
+    }
+
+    #vh-main .vh-shortcuts a > span:last-child {
+        margin-left: auto;
+    }
+
+    #vh-main .vh-shortcuts img {
+        width: 25px;
+        height: 25px;
+    }
+}
