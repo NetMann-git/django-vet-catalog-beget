@@ -107,7 +107,8 @@ class VetHomeTests(TestCase):
         TeamMember.objects.create(name="Черновик врача", position="Терапевт", is_clinic_doctor=True, is_published=False)
         TeamMember.objects.create(name="Старая команда", position="Менеджер")
 
-        response = self.client.get(reverse("home"))
-        self.assertContains(response, "Врач ВетАссист")
-        self.assertNotContains(response, "Черновик врача")
-        self.assertNotContains(response, "Старая команда")
+        for route in ("home", "clinic_doctors"):
+            response = self.client.get(reverse(route))
+            self.assertContains(response, "Врач ВетАссист")
+            self.assertNotContains(response, "Черновик врача")
+            self.assertNotContains(response, "Старая команда")

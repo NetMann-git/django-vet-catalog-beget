@@ -1,0 +1,30 @@
+{% extends 'home/vet_base.html' %}
+{% block title %}Врачи — ВетАссист{% endblock %}
+{% block vet_content %}
+<div class="vh-wrap vs-page">
+    <nav class="vs-breadcrumbs" aria-label="Хлебные крошки">
+        <a href="{% url 'home' %}">Главная</a>
+        <span aria-hidden="true">/</span>
+        <span aria-current="page">Врачи</span>
+    </nav>
+    <h1>Врачи ВетАссист</h1>
+    {% if clinic_doctors %}
+    <div class="vs-grid">
+        {% for doctor in clinic_doctors %}
+        <article class="vs-card">
+            {% if doctor.image %}
+            <img src="{{ doctor.image.url }}" alt="" width="160" height="160" loading="lazy" style="max-width:100%;object-fit:cover;border-radius:12px">
+            {% endif %}
+            <div>
+                <h2>{{ doctor.name }}</h2>
+                <p>{{ doctor.position }}</p>
+            </div>
+        </article>
+        {% endfor %}
+    </div>
+    {% else %}
+    <p>Информация о врачах появится после публикации карточек.</p>
+    {% endif %}
+    <p><a class="vh-button" href="{% url 'home' %}#callback" data-help="Открыть форму обратного звонка.">Оставить заявку</a></p>
+</div>
+{% endblock %}

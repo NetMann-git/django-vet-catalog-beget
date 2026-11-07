@@ -7,6 +7,10 @@ from apps.appointments.forms import CallbackRequestForm
 from .models import ClinicService, TeamMember
 
 
+def published_clinic_doctors():
+    return TeamMember.objects.filter(is_clinic_doctor=True, is_published=True)
+
+
 class VetHomeContextBuilder:
     @staticmethod
     def build(request):
@@ -46,5 +50,5 @@ class VetHomeContextBuilder:
         return {
             "callback_form": form,
             "service_shortcuts": shortcuts,
-            "clinic_doctors": TeamMember.objects.filter(is_clinic_doctor=True, is_published=True),
+            "clinic_doctors": published_clinic_doctors(),
         }

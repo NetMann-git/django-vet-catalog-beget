@@ -4,13 +4,17 @@ from django.conf import settings
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
 
-from .vet_context import VetHomeContextBuilder
+from .vet_context import VetHomeContextBuilder, published_clinic_doctors
 
 
 def home(request):
     context = VetHomeContextBuilder.build(request)
     context.update(_clinic_contact_context())
     return render(request, "home/home.html", context)
+
+
+def doctors(request):
+    return render(request, "home/doctors.html", {"clinic_doctors": published_clinic_doctors()})
 
 
 def services(request):

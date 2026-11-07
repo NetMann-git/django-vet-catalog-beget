@@ -25,7 +25,7 @@
 </section>
 <nav class="vh-wrap vh-shortcuts" aria-label="Быстрые переходы">
     <a href="{% url 'furniture_services' %}" data-help="Открыть услуги и цены."><img src="{% static 'home/images/approved/shortcut-paw.png' %}" alt="">Услуги и цены <span aria-hidden="true">→</span></a>
-    <a href="#team" data-help="Перейти к разделу о врачах."><img src="{% static 'home/images/approved/shortcut-team.png' %}" alt="">Наши врачи <span aria-hidden="true">→</span></a>
+    <a href="{% url 'clinic_doctors' %}" data-help="Открыть страницу врачей клиники."><img src="{% static 'home/images/approved/shortcut-team.png' %}" alt="">Наши врачи <span aria-hidden="true">→</span></a>
     <a href="{% url 'furniture_contacts' %}" data-help="Посмотреть контакты клиники."><img src="{% static 'home/images/approved/shortcut-map.png' %}" alt="">Как нас найти <span aria-hidden="true">→</span></a>
 </nav>
 <section class="vh-wrap vm-care" id="first-visit" aria-labelledby="vh-start-title">
@@ -61,6 +61,7 @@
         {% else %}
         <p>Карточки врачей появятся после публикации.</p>
         {% endif %}
+        <a class="vh-text-link" href="{% url 'clinic_doctors' %}" data-help="Открыть страницу врачей клиники.">Все врачи →</a>
     </section>
     <section id="clinic-reviews" aria-labelledby="vh-review-title">
         <h2 id="vh-review-title">Здесь появятся ваши истории</h2>
