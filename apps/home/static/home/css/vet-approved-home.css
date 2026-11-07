@@ -95,3 +95,25 @@
     #vh-main .vh-actions { flex-direction: column; }
     #vh-main h1::after { margin-inline: auto; }
 }
+
+/* Лавандовая веточка в правом углу блока знакомства. */
+@media (min-width: 900px) {
+    #vh-main .vh-about-copy {
+        position: relative;
+        isolation: isolate;
+        padding-right: 146px;
+    }
+
+    #vh-main .vh-about-copy::after {
+        content: "";
+        position: absolute;
+        right: 8px;
+        bottom: 3px;
+        z-index: -1;
+        width: 138px;
+        aspect-ratio: 148 / 110;
+        background: url('../images/approved/lavender.png') center / contain no-repeat;
+        mix-blend-mode: multiply;
+        pointer-events: none;
+    }
+}
