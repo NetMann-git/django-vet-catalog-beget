@@ -54,6 +54,7 @@ def _clinic_contact_context():
             "clinic_address": contacts.get("address"),
             "clinic_map_url": contacts.get("map_url"),
             "clinic_phones": contacts.get("phones", []),
+            "clinic_socials": contacts.get("socials", []),
             "clinic_schedule": WorkingHours.objects.filter(is_active=True),
         }
 

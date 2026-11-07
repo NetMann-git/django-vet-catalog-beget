@@ -23,7 +23,7 @@
         <img src="{% static 'home/images/vet-care-paw.png' %}" width="1536" height="1024" alt="" decoding="async">
     </header>
     <div class="vc-grid">
-        {% if clinic_phones or clinic_address or clinic_hours or clinic_schedule or clinic_map_url %}
+        {% if clinic_phones or clinic_address or clinic_hours or clinic_schedule or clinic_map_url or clinic_socials %}
         <section class="vs-card" aria-labelledby="clinic-contacts-title">
             <h2 id="clinic-contacts-title">Как с нами связаться</h2>
             <dl class="vc-details">
@@ -32,11 +32,20 @@
                 {% if clinic_hours or clinic_schedule %}<div><dt>Режим работы</dt>{% include 'home/includes/clinic_schedule.html' %}</div>{% endif %}
             </dl>
             {% if clinic_map_url %}<a class="vh-text-link" href="{{ clinic_map_url }}" target="_blank" rel="noopener noreferrer" data-help="Открыть карту в новой вкладке.">Открыть карту ↗</a>{% endif %}
+            {% if clinic_socials %}
+            <nav aria-label="Мессенджеры и соцсети клиники">
+                <ul>
+                    {% for social in clinic_socials %}
+                    <li><a class="vh-text-link" href="{{ social.url }}" target="_blank" rel="noopener noreferrer" data-help="Открыть {{ social.name }} в новой вкладке.">{{ social.name }} ↗</a></li>
+                    {% endfor %}
+                </ul>
+            </nav>
+            {% endif %}
         </section>
         {% endif %}
         <section class="vs-card vs-detail-price" aria-labelledby="clinic-callback-title">
             <h2 id="clinic-callback-title">Обратный звонок</h2>
-            {% if not clinic_phones and not clinic_address and not clinic_hours and not clinic_schedule and not clinic_map_url %}
+            {% if not clinic_phones and not clinic_address and not clinic_hours and not clinic_schedule and not clinic_map_url and not clinic_socials %}
             <p>Контакты пока не опубликованы. Свяжитесь с нами через форму обратного звонка.</p>
             {% else %}
             <p>Оставьте номер телефона и напишите, что хотите уточнить.</p>
