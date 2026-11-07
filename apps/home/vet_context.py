@@ -19,6 +19,8 @@ class VetHomeContextBuilder:
             if name:
                 initial["comment"] = f"Интересует услуга: {name}"
         form = CallbackRequestForm(initial=initial)
+        for name, field in form.fields.items():
+            field.widget.attrs["aria-describedby"] = f"callback-{name}-error"
         form.fields['phone'].widget.attrs.update({'placeholder': 'Ваш номер телефона'})
         form.fields['comment'].widget.attrs.update({
             'placeholder': 'Кто ваш питомец и когда вам удобно ответить на звонок',
