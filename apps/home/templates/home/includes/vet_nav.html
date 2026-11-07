@@ -1,3 +1,6 @@
+{% if show_home %}
+<a href="{% url 'home' %}"{% if request.resolver_match.url_name == 'home' %} aria-current="page"{% endif %} data-help="Вернуться на главную страницу.">Главная</a>
+{% endif %}
 <a href="{% url 'furniture_services' %}"{% if request.resolver_match.url_name == 'furniture_services' %} aria-current="page"{% endif %} data-help="Открыть раздел услуг и прочитать опубликованную информацию.">Услуги и цены</a>
 <a href="{% url 'furniture_about' %}"{% if request.resolver_match.url_name == 'furniture_about' %} aria-current="page"{% endif %} data-help="Открыть страницу знакомства и прочитать опубликованную информацию.">О клинике</a>
 <a href="{% url 'furniture_reviews' %}"{% if request.resolver_match.url_name == 'furniture_reviews' %} aria-current="page"{% endif %} data-help="Открыть раздел опубликованных отзывов.">Отзывы</a>
