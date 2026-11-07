@@ -304,3 +304,9 @@ THUMBNAIL_ALIASES = {
         'small': {'size': (100, 150), 'crop': True},
     },
 }
+
+# Published clinic contact details.
+VET_CLINIC_PHONE = config("VET_CLINIC_PHONE", default="")
+VET_CLINIC_ADDRESS = config("VET_CLINIC_ADDRESS", default="")
+VET_CLINIC_HOURS = config("VET_CLINIC_HOURS", default="")
+VET_CLINIC_MAP_URL = config("VET_CLINIC_MAP_URL", default="")

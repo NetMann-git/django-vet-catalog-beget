@@ -1,5 +1,6 @@
 # apps/home/views.py
 
+from django.conf import settings
 from django.shortcuts import get_object_or_404, render
 
 from .vet_context import VetHomeContextBuilder
@@ -42,7 +43,13 @@ def about(request):
 
 
 def contacts(request):
-    return render(request, "home/contacts.html")
+    from .templatetags.furniture_contacts import public_url
+
+    return render(request, "home/contacts.html", {
+        "clinic_address": settings.VET_CLINIC_ADDRESS.strip(),
+        "clinic_hours": settings.VET_CLINIC_HOURS.strip(),
+        "clinic_map_url": public_url(settings.VET_CLINIC_MAP_URL),
+    })
 
 
 def portfolio(request):
