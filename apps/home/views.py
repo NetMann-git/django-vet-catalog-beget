@@ -44,9 +44,23 @@ def about(request):
 
 
 def _clinic_contact_context():
-    from .templatetags.furniture_contacts import public_url
+    from .templatetags.furniture_contacts import get_contacts, phone_link, public_url
+
+    if settings.VET_CLINIC_USE_ADMIN_CONTACTS:
+        from apps.appointments.models import WorkingHours
+
+        contacts = get_contacts()
+        return {
+            "clinic_address": contacts.get("address"),
+            "clinic_map_url": contacts.get("map_url"),
+            "clinic_phones": contacts.get("phones", []),
+            "clinic_schedule": WorkingHours.objects.filter(is_active=True),
+        }
+
+    phone = phone_link(settings.VET_CLINIC_PHONE)
 
     return {
+        "clinic_phones": [phone] if phone else [],
         "clinic_address": settings.VET_CLINIC_ADDRESS.strip(),
         "clinic_hours": settings.VET_CLINIC_HOURS.strip(),
         "clinic_map_url": public_url(settings.VET_CLINIC_MAP_URL),

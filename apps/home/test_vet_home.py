@@ -49,3 +49,29 @@ class VetHomeTests(TestCase):
         self.assertIn('phone', response.json()['errors'])
         self.assertEqual(Client(enforce_csrf_checks=True).post(endpoint, {'phone': '+7 (900) 123-45-67'}).status_code, 403)
         self.assertEqual(CallbackRequest.objects.count(), before)
+
+    def test_admin_contacts_and_active_schedule_on_both_pages(self):
+        from datetime import time
+        from apps.appointments.models import WorkingHours
+
+        ContactSettings.objects.update_or_create(pk=1, defaults={
+            "address": "Адрес клиники для теста",
+            "phone_primary": "+7 (900) 111-22-33",
+            "phone_secondary": "",
+            "map_url": "https://example.com/clinic",
+            "is_published": True,
+        })
+        WorkingHours.objects.update_or_create(day_of_week=0, defaults={
+            "start_time": time(9), "end_time": time(18), "is_active": True,
+        })
+        WorkingHours.objects.update_or_create(day_of_week=6, defaults={
+            "start_time": time(10), "end_time": time(14), "is_active": False,
+        })
+        with self.settings(VET_CLINIC_USE_ADMIN_CONTACTS=True):
+            for url in (reverse("home"), reverse("furniture_contacts")):
+                response = self.client.get(url)
+                self.assertContains(response, "Адрес клиники для теста")
+                self.assertContains(response, "tel:+79001112233")
+                self.assertContains(response, "https://example.com/clinic")
+                self.assertContains(response, "Понедельник: 09:00–18:00")
+                self.assertNotContains(response, "Воскресенье")

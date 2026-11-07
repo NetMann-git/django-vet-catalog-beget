@@ -61,13 +61,15 @@
     </section>
     <section id="clinic-contacts" aria-labelledby="vh-contact-title">
         <h2 id="vh-contact-title">Мы рядом</h2>
-        {% if clinic_address or clinic_hours %}
+        {% if clinic_address or clinic_hours or clinic_schedule %}
         <dl class="vm-contact-details">
             {% if clinic_address %}<dt>Адрес</dt><dd>{{ clinic_address }}</dd>{% endif %}
-            {% if clinic_hours %}<dt>Часы работы</dt><dd>{{ clinic_hours|linebreaksbr }}</dd>{% endif %}
+            {% if clinic_hours or clinic_schedule %}<dt>Часы работы</dt>
+                {% include 'home/includes/clinic_schedule.html' %}
+            {% endif %}
         </dl>
         {% endif %}
-        {% if va_phone %}<a class="vh-contact-phone" href="{{ va_phone.url }}" data-help="Открыть приложение для звонка.">{{ va_phone.text }}</a>{% endif %}
+        {% for phone in clinic_phones %}<div><a class="vh-contact-phone" href="{{ phone.url }}" data-help="Открыть приложение для звонка.">{{ phone.text }}</a></div>{% endfor %}
         {% if clinic_map_url %}
         <img src="{% static 'home/images/approved/map.png' %}" alt="" width="126" height="77" loading="lazy">
         <a class="vh-text-link" href="{{ clinic_map_url }}" target="_blank" rel="noopener noreferrer" data-help="Открыть карту в новой вкладке.">Как добраться →</a>

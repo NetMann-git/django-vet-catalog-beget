@@ -310,3 +310,5 @@ VET_CLINIC_PHONE = config("VET_CLINIC_PHONE", default="")
 VET_CLINIC_ADDRESS = config("VET_CLINIC_ADDRESS", default="")
 VET_CLINIC_HOURS = config("VET_CLINIC_HOURS", default="")
 VET_CLINIC_MAP_URL = config("VET_CLINIC_MAP_URL", default="")
+
+VET_CLINIC_USE_ADMIN_CONTACTS = config("VET_CLINIC_USE_ADMIN_CONTACTS", default=False, cast=bool)

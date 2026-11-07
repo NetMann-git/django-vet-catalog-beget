@@ -1,0 +1,9 @@
+{% if clinic_hours %}
+    <dd>{{ clinic_hours|linebreaksbr }}</dd>
+{% else %}
+    <dd>
+        {% for shift in clinic_schedule %}
+            <div>{{ shift.get_day_of_week_display }}: {{ shift.start_time|time:"H:i" }}–{{ shift.end_time|time:"H:i" }}</div>
+        {% endfor %}
+    </dd>
+{% endif %}

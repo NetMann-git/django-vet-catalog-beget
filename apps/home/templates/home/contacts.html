@@ -1,5 +1,5 @@
 {% extends 'home/vet_base.html' %}
-{% load static vet_brand %}
+{% load static %}
 {% block title %}Контакты — ВетАссист{% endblock %}
 {% block seo_meta %}<meta name="description" content="Контакты ветеринарной клиники ВетАссист и форма обратного звонка.">{% endblock %}
 {% block global_css %}
@@ -7,7 +7,6 @@
 <link rel="stylesheet" href="{% static 'home/css/vet-contacts.css' %}">
 {% endblock %}
 {% block vet_content %}
-{% clinic_phone as phone %}
 <div class="vh-wrap vs-page">
     <nav class="vs-breadcrumbs" aria-label="Хлебные крошки">
         <a href="{% url 'home' %}">Главная</a>
@@ -24,20 +23,20 @@
         <img src="{% static 'home/images/vet-care-paw.png' %}" width="1536" height="1024" alt="" decoding="async">
     </header>
     <div class="vc-grid">
-        {% if phone or clinic_address or clinic_hours or clinic_map_url %}
+        {% if clinic_phones or clinic_address or clinic_hours or clinic_schedule or clinic_map_url %}
         <section class="vs-card" aria-labelledby="clinic-contacts-title">
             <h2 id="clinic-contacts-title">Как с нами связаться</h2>
             <dl class="vc-details">
-                {% if phone %}<div><dt>Телефон</dt><dd><a href="{{ phone.url }}" data-help="Открыть приложение для звонка в клинику.">{{ phone.text }}</a></dd></div>{% endif %}
+                {% for phone in clinic_phones %}<div><dt>Телефон</dt><dd><a href="{{ phone.url }}" data-help="Открыть приложение для звонка в клинику.">{{ phone.text }}</a></dd></div>{% endfor %}
                 {% if clinic_address %}<div><dt>Адрес</dt><dd>{{ clinic_address }}</dd></div>{% endif %}
-                {% if clinic_hours %}<div><dt>Режим работы</dt><dd>{{ clinic_hours|linebreaksbr }}</dd></div>{% endif %}
+                {% if clinic_hours or clinic_schedule %}<div><dt>Режим работы</dt>{% include 'home/includes/clinic_schedule.html' %}</div>{% endif %}
             </dl>
             {% if clinic_map_url %}<a class="vh-text-link" href="{{ clinic_map_url }}" target="_blank" rel="noopener noreferrer" data-help="Открыть карту в новой вкладке.">Открыть карту ↗</a>{% endif %}
         </section>
         {% endif %}
         <section class="vs-card vs-detail-price" aria-labelledby="clinic-callback-title">
             <h2 id="clinic-callback-title">Обратный звонок</h2>
-            {% if not phone and not clinic_address and not clinic_hours and not clinic_map_url %}
+            {% if not clinic_phones and not clinic_address and not clinic_hours and not clinic_schedule and not clinic_map_url %}
             <p>Контакты пока не опубликованы. Свяжитесь с нами через форму обратного звонка.</p>
             {% else %}
             <p>Оставьте номер телефона и напишите, что хотите уточнить.</p>
