@@ -2,6 +2,7 @@
 
 from django.conf import settings
 from django.shortcuts import get_object_or_404, render
+from django.urls import reverse
 
 from .vet_context import VetHomeContextBuilder
 
@@ -21,7 +22,8 @@ def service_detail(request, slug):
     from .models import ClinicService
 
     service = get_object_or_404(ClinicService, slug=slug, is_published=True)
-    return render(request, "home/service_detail.html", {"service": service})
+    callback_url = reverse("home", query={"service": service.slug}, fragment="callback")
+    return render(request, "home/service_detail.html", {"service": service, "callback_url": callback_url})
 
 
 def materials(request):
@@ -74,6 +76,5 @@ def contacts(request):
 
 def portfolio(request):
     from django.shortcuts import redirect
-    from django.urls import reverse
 
     return redirect(reverse("home") + "#portfolio")

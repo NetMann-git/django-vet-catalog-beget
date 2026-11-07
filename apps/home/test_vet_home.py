@@ -85,3 +85,18 @@ class VetHomeTests(TestCase):
         shortcuts = {item["label"]: item["url"] for item in response.context["service_shortcuts"]}
         self.assertEqual(shortcuts["Диагностика"], reverse("furniture_services", query={"group": "Диагностика"}))
         self.assertEqual(shortcuts["Профилактика"], reverse("furniture_services"))
+
+    def test_callback_prefills_comment_only_for_published_service(self):
+        from .models import ClinicService
+
+        service = ClinicService.objects.create(
+            name="УЗИ питомца", slug="узи", is_published=True,
+        )
+        url = reverse("home", query={"service": service.slug}, fragment="callback")
+        detail = self.client.get(reverse("clinic_service_detail", args=[service.slug]))
+        self.assertContains(detail, f'href="{url}"')
+        self.assertContains(self.client.get(url), "Интересует услуга: УЗИ питомца")
+
+        service.is_published = False
+        service.save(update_fields=["is_published"])
+        self.assertNotContains(self.client.get(url), "УЗИ питомца")

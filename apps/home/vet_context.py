@@ -10,7 +10,15 @@ from .models import ClinicService
 class VetHomeContextBuilder:
     @staticmethod
     def build(request):
-        form = CallbackRequestForm()
+        service_slug = request.GET.get("service", "").strip()
+        initial = {}
+        if service_slug and len(service_slug) <= 180:
+            name = ClinicService.objects.filter(
+                slug=service_slug, is_published=True,
+            ).values_list("name", flat=True).first()
+            if name:
+                initial["comment"] = f"Интересует услуга: {name}"
+        form = CallbackRequestForm(initial=initial)
         form.fields['phone'].widget.attrs.update({'placeholder': 'Ваш номер телефона'})
         form.fields['comment'].widget.attrs.update({
             'placeholder': 'Кто ваш питомец и когда вам удобно ответить на звонок',

@@ -35,8 +35,8 @@
         <section class="vs-card vs-detail-price" aria-labelledby="service-price-heading">
             <h2 id="service-price-heading">Стоимость</h2>
             {% include 'home/includes/vet_service_price.html' %}
-            <a class="vh-button" href="{% url 'home' %}#callback"
-               data-help="Оставить заявку на обратный звонок. Укажите название услуги в комментарии.">Задать вопрос об услуге</a>
+            <a class="vh-button" href="{{ callback_url }}"
+               data-help="Оставить заявку на обратный звонок. Название услуги уже будет в комментарии.">Задать вопрос об услуге</a>
         </section>
     </div>
 </article>
