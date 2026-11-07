@@ -1,7 +1,11 @@
 {% extends 'home/vet_base.html' %}
-{% load vet_brand %}
+{% load static vet_brand %}
 {% block title %}Контакты — ВетАссист{% endblock %}
 {% block seo_meta %}<meta name="description" content="Контакты ветеринарной клиники ВетАссист и форма обратного звонка.">{% endblock %}
+{% block global_css %}
+{{ block.super }}
+<link rel="stylesheet" href="{% static 'home/css/vet-contacts.css' %}">
+{% endblock %}
 {% block vet_content %}
 {% clinic_phone as phone %}
 <div class="vh-wrap vs-page">
@@ -10,22 +14,25 @@
         <span aria-hidden="true">/</span>
         <span aria-current="page">Контакты</span>
     </nav>
-    <header class="vs-heading">
+    <header class="vc-hero">
         <div>
             <p class="vh-eyebrow">Ветеринарная клиника ВетАссист</p>
-            <h1>Контакты</h1>
+            <h1>Мы рядом</h1>
+            <p>Контакты клиники и обратный звонок.</p>
+            <a class="vh-button" href="{% url 'home' %}#callback" data-help="Перейти к форме обратного звонка на главной странице.">Оставить заявку</a>
         </div>
+        <img src="{% static 'home/images/vet-care-paw.png' %}" width="1536" height="1024" alt="" decoding="async">
     </header>
-    <div class="vs-detail-grid">
+    <div class="vc-grid">
         {% if phone or clinic_address or clinic_hours or clinic_map_url %}
         <section class="vs-card" aria-labelledby="clinic-contacts-title">
             <h2 id="clinic-contacts-title">Как с нами связаться</h2>
-            <dl>
-                {% if phone %}<dt>Телефон</dt><dd><a href="{{ phone.url }}">{{ phone.text }}</a></dd>{% endif %}
-                {% if clinic_address %}<dt>Адрес</dt><dd>{{ clinic_address }}</dd>{% endif %}
-                {% if clinic_hours %}<dt>Режим работы</dt><dd>{{ clinic_hours|linebreaksbr }}</dd>{% endif %}
+            <dl class="vc-details">
+                {% if phone %}<div><dt>Телефон</dt><dd><a href="{{ phone.url }}" data-help="Открыть приложение для звонка в клинику.">{{ phone.text }}</a></dd></div>{% endif %}
+                {% if clinic_address %}<div><dt>Адрес</dt><dd>{{ clinic_address }}</dd></div>{% endif %}
+                {% if clinic_hours %}<div><dt>Режим работы</dt><dd>{{ clinic_hours|linebreaksbr }}</dd></div>{% endif %}
             </dl>
-            {% if clinic_map_url %}<a class="vh-text-link" href="{{ clinic_map_url }}" target="_blank" rel="noopener noreferrer">Открыть карту ↗</a>{% endif %}
+            {% if clinic_map_url %}<a class="vh-text-link" href="{{ clinic_map_url }}" target="_blank" rel="noopener noreferrer" data-help="Открыть карту в новой вкладке.">Открыть карту ↗</a>{% endif %}
         </section>
         {% endif %}
         <section class="vs-card vs-detail-price" aria-labelledby="clinic-callback-title">
@@ -35,7 +42,7 @@
             {% else %}
             <p>Оставьте номер телефона и напишите, что хотите уточнить.</p>
             {% endif %}
-            <a class="vh-button" href="{% url 'home' %}#callback">Заказать звонок</a>
+            <a class="vh-button" href="{% url 'home' %}#callback" data-help="Перейти к форме обратного звонка на главной странице.">Заказать звонок</a>
         </section>
     </div>
 </div>
