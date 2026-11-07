@@ -12,6 +12,7 @@
     function clearErrors() {
         form.querySelectorAll('.home-callback__field').forEach(function (field) {
             field.classList.remove('is-invalid');
+            field.querySelector('[aria-invalid="true"]')?.removeAttribute('aria-invalid');
             var error = field.querySelector('.home-callback__error');
             if (error) {
                 error.textContent = '';
@@ -34,11 +35,13 @@
                 return;
             }
             field.classList.add('is-invalid');
+            field.querySelector('input, textarea')?.setAttribute('aria-invalid', 'true');
             var error = field.querySelector('.home-callback__error');
             if (error && errors[name] && errors[name].length) {
                 error.textContent = errors[name][0];
             }
         });
+        form.querySelector('[aria-invalid="true"]')?.focus();
     }
 
     form.addEventListener('submit', function (event) {
@@ -49,9 +52,6 @@
         if (!phone || !phone.value.trim()) {
             showFieldErrors({ phone: ['Введите номер телефона.'] });
             showStatus('Проверьте заполнение формы.', 'error');
-            if (phone) {
-                phone.focus();
-            }
             return;
         }
 
