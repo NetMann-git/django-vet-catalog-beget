@@ -155,3 +155,13 @@
     margin: 0 0 6px;
     overflow-wrap: anywhere;
 }
+
+.vm-services a {
+    display: block;
+    text-decoration: none;
+}
+
+.vm-services a:hover,
+.vm-services a:focus-visible {
+    text-decoration: underline;
+}

@@ -75,3 +75,13 @@ class VetHomeTests(TestCase):
                 self.assertContains(response, "https://example.com/clinic")
                 self.assertContains(response, "Понедельник: 09:00–18:00")
                 self.assertNotContains(response, "Воскресенье")
+
+    def test_service_shortcuts_filter_only_published_groups(self):
+        from .models import ClinicService
+
+        ClinicService.objects.create(name="УЗИ", slug="uzi", group="Диагностика", is_published=True)
+        ClinicService.objects.create(name="Вакцинация", slug="vaccine", group="Профилактика")
+        response = self.client.get(reverse("home"))
+        shortcuts = {item["label"]: item["url"] for item in response.context["service_shortcuts"]}
+        self.assertEqual(shortcuts["Диагностика"], reverse("furniture_services", query={"group": "Диагностика"}))
+        self.assertEqual(shortcuts["Профилактика"], reverse("furniture_services"))

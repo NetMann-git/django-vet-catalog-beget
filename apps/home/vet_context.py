@@ -1,5 +1,10 @@
 """Контекст главной клиники без унаследованных мебельных данных, шаг 4."""
+from django.urls import reverse
+
 from apps.appointments.forms import CallbackRequestForm
+
+
+from .models import ClinicService
 
 
 class VetHomeContextBuilder:
@@ -11,4 +16,21 @@ class VetHomeContextBuilder:
             'placeholder': 'Кто ваш питомец и когда вам удобно ответить на звонок',
             'rows': 4,
         })
-        return {'callback_form': form}
+        categories = (
+            ("Приём врача", "intake"),
+            ("Диагностика", "diagnosis"),
+            ("Профилактика", "prevention"),
+            ("Лечение", "treatment"),
+        )
+        groups = set(ClinicService.objects.filter(
+            is_published=True, group__in=[label for label, _ in categories],
+        ).values_list("group", flat=True))
+        shortcuts = [
+            {
+                "label": label,
+                "icon": f"home/images/approved/{icon}.png",
+                "url": reverse("furniture_services", query={"group": label} if label in groups else None),
+            }
+            for label, icon in categories
+        ]
+        return {"callback_form": form, "service_shortcuts": shortcuts}

@@ -31,10 +31,9 @@
 <section class="vh-wrap vm-care" id="first-visit" aria-labelledby="vh-start-title">
     <h2 id="vh-start-title">Рядом, когда нужна забота</h2>
     <ul class="vm-services">
-        <li><img src="{% static 'home/images/approved/intake.png' %}" alt="">Приём врача</li>
-        <li><img src="{% static 'home/images/approved/diagnosis.png' %}" alt="">Диагностика</li>
-        <li><img src="{% static 'home/images/approved/prevention.png' %}" alt="">Профилактика</li>
-        <li><img src="{% static 'home/images/approved/treatment.png' %}" alt="">Лечение</li>
+        {% for shortcut in service_shortcuts %}
+        <li><a href="{{ shortcut.url }}" data-help="Открыть каталог услуг клиники."><img src="{% static shortcut.icon %}" alt="">{{ shortcut.label }}</a></li>
+        {% endfor %}
     </ul>
     <a class="vh-text-link" href="{% url 'furniture_services' %}" data-help="Открыть полный список услуг.">Все услуги и цены →</a>
 </section>
