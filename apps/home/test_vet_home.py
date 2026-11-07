@@ -16,7 +16,7 @@ class VetHomeTests(TestCase):
         response = self.client.get('/')
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, 'С заботой о тех,')
-        self.assertContains(response, 'vet-mascot-original.jpg')
+        self.assertContains(response, 'home/images/approved/hero.png')
         self.assertNotContains(response, 'Адрес автокаталога')
         self.assertNotContains(response, 'Сотрудник мебельного каталога')
         self.assertNotContains(response, 'Например: шкаф в прихожую')

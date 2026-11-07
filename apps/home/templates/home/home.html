@@ -2,7 +2,7 @@
 {% block title %}ВетАссист — ветеринарная клиника{% endblock %}{% block title_suffix %}{% endblock %}
 {% block seo_meta %}<meta name="description" content="ВетАссист — внимание к питомцу и спокойствие для вас. Знакомство с клиникой и заявка на обратный звонок."><meta property="og:title" content="ВетАссист — ветеринарная клиника"><meta property="og:description" content="С заботой о тех, кто вам дорог."><meta property="og:type" content="website"><meta property="og:url" content="{{ request.build_absolute_uri }}"><meta property="og:locale" content="ru_RU">{% endblock %}
 {% block body_class %}vet-home{% endblock %}{% block body_theme_class %}{% endblock %}
-{% block global_css %}<link rel="stylesheet" href="{% static 'home/css/vet-home.css' %}">{% endblock %}
+{% block global_css %}<link rel="stylesheet" href="{% static 'home/css/vet-home.css' %}"><link rel="stylesheet" href="{% static 'home/css/vet-approved-home.css' %}">{% endblock %}
 {% block legacy_card_css %}{% endblock %}
 {% block site_shell %}{% clinic_phone as va_phone %}
 <a class="vh-skip" href="#vh-main" data-help="Пропустить шапку и перейти к основному содержимому страницы.">Перейти к содержимому</a>
@@ -10,14 +10,71 @@
 {% if messages %}<div class="vh-wrap vh-messages" role="status">{% for message in messages %}<p>{{ message }}</p>{% endfor %}</div>{% endif %}
 <main id="vh-main">
 <section class="vh-hero" aria-labelledby="vh-title">
-<div class="vh-hero-copy"><p class="vh-eyebrow">Ветеринарная клиника · ВетАссист</p><h1 id="vh-title">С заботой о тех,<br>кто вам дорог</h1><p class="vh-lead">Внимание к питомцу<br>и спокойствие для вас.</p><div class="vh-actions"><a class="vh-button" href="#callback" data-help="Перейти к форме обратного звонка на этой странице. Телефон обязателен; имя и комментарий можно оставить по желанию.">Оставить заявку</a><a class="vh-text-link" href="#about-clinic" data-help="Перейти к блоку знакомства с клиникой на этой странице.">Познакомиться с клиникой <span aria-hidden="true">→</span></a></div></div>
-<div class="vh-hero-photo"><img src="{% static 'home/images/vet-mascot-original.jpg' %}" alt="Рыжий котик нюхает синие цветы — талисман ВетАссист" width="2560" height="1440" fetchpriority="high" decoding="async"></div>
+    <div class="vh-hero-copy">
+        <h1 id="vh-title">С заботой о тех,<br>кто вам дорог</h1>
+        <p class="vh-lead">Внимание к питомцу и спокойствие для вас</p>
+        <div class="vh-actions">
+            <a class="vh-button" href="#callback" data-help="Оставить телефон для обратного звонка. Приём подтверждает администратор.">Записаться на приём</a>
+            <a class="vh-text-link" href="#about-clinic" data-help="Перейти к знакомству с клиникой.">Познакомиться с клиникой →</a>
+        </div>
+    </div>
+    <picture class="vh-hero-photo">
+        <source media="(max-width: 720px)" srcset="{% static 'home/images/approved/mobile.png' %}">
+        <img src="{% static 'home/images/approved/hero.png' %}" alt="Рыжий кот у лавандовых цветов" width="584" height="257" fetchpriority="high">
+    </picture>
 </section>
-<nav class="vh-wrap vh-shortcuts" aria-label="Быстрые переходы"><a href="{% url 'furniture_services' %}" data-help="Открыть раздел услуг и прочитать опубликованную информацию."><span aria-hidden="true">01</span> Услуги клиники <span aria-hidden="true">→</span></a><a href="#team" data-help="Перейти к разделу команды. Информация о специалистах появится после её добавления."><span aria-hidden="true">02</span> Знакомство с командой <span aria-hidden="true">→</span></a><a href="#clinic-contacts" data-help="Перейти к блоку связи с клиникой на этой странице."><span aria-hidden="true">03</span> Как с нами связаться <span aria-hidden="true">→</span></a></nav>
-<section class="vh-wrap vh-section" id="first-visit" aria-labelledby="vh-start-title"><div class="vh-section-heading"><p class="vh-eyebrow">Рядом, когда нужна забота</p><h2 id="vh-start-title">Начнём со знакомства</h2><p>Расскажите о вашем питомце и задайте вопросы.<br>Дату и время визита подтвердит администратор.</p></div><div class="vh-steps"><article><span class="vh-number">01</span><h3>Оставьте заявку</h3><p>Укажите телефон и, если хотите, кратко расскажите о питомце.</p><a class="vh-text-link" href="#callback" data-help="Перейти к форме обратного звонка на этой странице. Телефон обязателен; имя и комментарий можно оставить по желанию.">К форме заявки →</a></article><article><span class="vh-number">02</span><h3>Обсудим ваш визит</h3><p>Администратор свяжется с вами, чтобы уточнить детали обращения.</p></article><article><span class="vh-number">03</span><h3>Подготовимся к встрече</h3><p>При подтверждении записи уточните, что взять с собой и как добраться.</p><a class="vh-text-link" href="#clinic-contacts" data-help="Перейти к блоку связи с клиникой на этой странице.">Связаться с клиникой →</a></article></div></section>
-<section class="vh-wrap vh-about" id="about-clinic" aria-labelledby="vh-about-title"><div class="vh-about-photo"><img src="{% static 'home/images/vet-care-paw.png' %}" alt="Лапка рыжего кота в ладони — иллюстрация заботы" width="1536" height="1024" loading="lazy" decoding="async"></div><div class="vh-about-copy"><p class="vh-eyebrow">Тепло начинается с внимания</p><h2 id="vh-about-title">Знакомство<br>с ВетАссист</h2><p>Вы знаете характер и привычки вашего питомца лучше всех. Расскажите нам о нём — знакомство начинается с вашего рассказа.</p><a class="vh-text-link" href="{% url 'furniture_about' %}" data-help="Открыть страницу знакомства и прочитать опубликованную информацию.">О клинике →</a></div></section>
-<div class="vh-wrap vh-section vh-info-grid"><section id="team" aria-labelledby="vh-team-title"><p class="vh-eyebrow">Наша команда</p><h2 id="vh-team-title">Люди, которым<br>вы доверяете</h2><p>Здесь появятся фотографии и информация о специалистах клиники.</p><a class="vh-text-link" href="#callback" data-help="Перейти к форме обратного звонка на этой странице. Телефон обязателен; имя и комментарий можно оставить по желанию.">Задать вопрос →</a></section><section id="clinic-reviews" aria-labelledby="vh-review-title"><p class="vh-eyebrow">Ваш опыт важен</p><h2 id="vh-review-title">Истории<br>заботы</h2><p>Здесь появятся отзывы владельцев питомцев.</p><p class="vh-note">Мы пока готовим этот раздел.</p></section><section id="clinic-contacts" aria-labelledby="vh-contact-title"><p class="vh-eyebrow">Будем рады знакомству</p><h2 id="vh-contact-title">Мы рядом</h2>{% if va_phone %}<a class="vh-contact-phone" href="{{ va_phone.url }}" data-help="Открыть приложение для звонка по телефону клиники. Звонок подтверждается в приложении.">{{ va_phone.text }}</a>{% else %}<p>Телефон, адрес и режим работы клиники будут добавлены после уточнения.</p>{% endif %}<a class="vh-text-link" href="#callback" data-help="Перейти к форме обратного звонка на этой странице. Телефон обязателен; имя и комментарий можно оставить по желанию.">Оставить заявку на звонок →</a></section></div>
-<section class="vh-callback" id="callback" aria-labelledby="vh-callback-title"><div class="vh-wrap vh-callback-grid"><div><p class="vh-eyebrow">Можно начать с одного вопроса</p><h2 id="vh-callback-title">Давайте<br>познакомимся</h2><p class="vh-lead">Оставьте заявку — администратор свяжется с вами.</p><p>Это заявка на обратный звонок,<br>а не подтверждённая запись на приём.</p><img class="vh-callback-mascot" src="{% static 'home/images/vet-mascot-original.jpg' %}" alt="" width="2560" height="1440" loading="lazy" decoding="async"></div><div class="vh-form-card"><form id="home-callback-form" action="{% url 'appointments:callback_submit' %}" method="post" novalidate>{% csrf_token %}<div class="home-callback__field" data-field="name"><label for="callback-name">Ваше имя <span>(необязательно)</span></label>{{ callback_form.name }}<span class="home-callback__error" aria-live="polite"></span></div><div class="home-callback__field" data-field="phone"><label for="callback-phone">Телефон <span>(обязательно)</span></label>{{ callback_form.phone }}<span class="home-callback__error" aria-live="polite"></span></div><div class="home-callback__field" data-field="comment"><label for="callback-comment">О питомце и удобном времени звонка <span>(необязательно)</span></label>{{ callback_form.comment }}<span class="home-callback__error" aria-live="polite"></span></div><div class="vh-honeypot" aria-hidden="true"><label for="callback-website">Ваш сайт</label><input id="callback-website" name="website" tabindex="-1" autocomplete="off"></div><button class="vh-button" type="submit" data-help="Отправить заявку на обратный звонок в клинику. Проверьте телефон; имя и комментарий необязательны. Отправка заявки не подтверждает запись на приём.">Отправить заявку</button><p class="vh-form-legal">Нажимая кнопку, вы соглашаетесь с <a href="{% url 'personal_data_consent' %}">обработкой персональных данных</a>. <a href="{% url 'privacy_policy' %}">Политика конфиденциальности</a>.</p></form><div id="home-callback-status" class="home-callback__status" role="status" aria-live="polite"></div></div></div></section>
+<nav class="vh-wrap vh-shortcuts" aria-label="Быстрые переходы">
+    <a href="{% url 'furniture_services' %}" data-help="Открыть услуги и цены."><span aria-hidden="true">✦</span>Услуги и цены <span aria-hidden="true">→</span></a>
+    <a href="#team" data-help="Перейти к разделу о врачах."><span aria-hidden="true">♧</span>Наши врачи <span aria-hidden="true">→</span></a>
+    <a href="{% url 'furniture_contacts' %}" data-help="Посмотреть контакты клиники."><span aria-hidden="true">⌖</span>Как нас найти <span aria-hidden="true">→</span></a>
+</nav>
+<section class="vh-wrap vm-care" id="first-visit" aria-labelledby="vh-start-title">
+    <h2 id="vh-start-title">Рядом, когда нужна забота</h2>
+    <ul class="vm-services">
+        <li><img src="{% static 'home/images/approved/intake.png' %}" alt="">Приём врача</li>
+        <li><img src="{% static 'home/images/approved/diagnosis.png' %}" alt="">Диагностика</li>
+        <li><img src="{% static 'home/images/approved/prevention.png' %}" alt="">Профилактика</li>
+        <li><img src="{% static 'home/images/approved/treatment.png' %}" alt="">Лечение</li>
+    </ul>
+    <a class="vh-text-link" href="{% url 'furniture_services' %}" data-help="Открыть полный список услуг.">Все услуги и цены →</a>
+</section>
+<section class="vh-wrap vh-about" id="about-clinic" aria-labelledby="vh-about-title">
+    <div class="vh-about-photo"><img src="{% static 'home/images/approved/paw.png' %}" alt="Лапка рыжего кота в ладони" width="486" height="133" loading="lazy"></div>
+    <div class="vh-about-copy">
+        <h2 id="vh-about-title">Знакомство с ВетАссист</h2>
+        <p>О клинике, людях и внимании к вашим питомцам</p>
+        <a class="vh-text-link" href="{% url 'furniture_about' %}" data-help="Открыть страницу о клинике.">О клинике →</a>
+    </div>
+</section>
+<div class="vh-wrap vh-info-grid">
+    <section id="team" aria-labelledby="vh-team-title">
+        <h2 id="vh-team-title">Люди, которым вы доверяете</h2>
+        <div class="vm-portraits">
+            <img src="{% static 'home/images/approved/doctor-a.png' %}" alt="" width="98" height="87" loading="lazy">
+            <img src="{% static 'home/images/approved/doctor-b.png' %}" alt="" width="99" height="87" loading="lazy">
+        </div>
+        <p class="vm-caption">Демонстрационные фотографии</p>
+    </section>
+    <section id="clinic-reviews" aria-labelledby="vh-review-title">
+        <h2 id="vh-review-title">Здесь появятся ваши истории</h2>
+        <a class="vh-text-link" href="{% url 'furniture_reviews' %}" data-help="Открыть страницу отзывов.">Отзывы →</a>
+    </section>
+    <section id="clinic-contacts" aria-labelledby="vh-contact-title">
+        <h2 id="vh-contact-title">Мы рядом</h2>
+        <img class="vm-map" src="{% static 'home/images/approved/map.png' %}" alt="" width="126" height="77" loading="lazy">
+        {% if va_phone %}<a class="vh-contact-phone" href="{{ va_phone.url }}" data-help="Открыть приложение для звонка.">{{ va_phone.text }}</a>{% endif %}
+        <a class="vh-text-link" href="{% url 'furniture_contacts' %}" data-help="Открыть адрес, режим работы и ссылку на карту, если они опубликованы.">Как добраться →</a>
+    </section>
+</div>
+<section class="vh-wrap vm-book">
+    <h2>Начнём со знакомства</h2>
+    <a class="vh-button" href="#callback" data-help="Перейти к форме обратного звонка.">Записаться на приём</a>
+</section>
+<section class="vh-callback" id="callback" aria-labelledby="vh-callback-title"><div class="vh-wrap vh-callback-grid"><div><p class="vh-eyebrow">Можно начать с одного вопроса</p><h2 id="vh-callback-title">Давайте<br>познакомимся</h2><p class="vh-lead">Оставьте заявку — администратор свяжется с вами.</p><p>Это заявка на обратный звонок,<br>а не подтверждённая запись на приём.</p></div><div class="vh-form-card"><form id="home-callback-form" action="{% url 'appointments:callback_submit' %}" method="post" novalidate>{% csrf_token %}<div class="home-callback__field" data-field="name"><label for="callback-name">Ваше имя <span>(необязательно)</span></label>{{ callback_form.name }}<span class="home-callback__error" aria-live="polite"></span></div><div class="home-callback__field" data-field="phone"><label for="callback-phone">Телефон <span>(обязательно)</span></label>{{ callback_form.phone }}<span class="home-callback__error" aria-live="polite"></span></div><div class="home-callback__field" data-field="comment"><label for="callback-comment">О питомце и удобном времени звонка <span>(необязательно)</span></label>{{ callback_form.comment }}<span class="home-callback__error" aria-live="polite"></span></div><div class="vh-honeypot" aria-hidden="true"><label for="callback-website">Ваш сайт</label><input id="callback-website" name="website" tabindex="-1" autocomplete="off"></div><button class="vh-button" type="submit" data-help="Отправить заявку на обратный звонок в клинику. Проверьте телефон; имя и комментарий необязательны. Отправка заявки не подтверждает запись на приём.">Отправить заявку</button><p class="vh-form-legal">Нажимая кнопку, вы соглашаетесь с <a href="{% url 'personal_data_consent' %}">обработкой персональных данных</a>. <a href="{% url 'privacy_policy' %}">Политика конфиденциальности</a>.</p></form><div id="home-callback-status" class="home-callback__status" role="status" aria-live="polite"></div></div></div></section>
+<nav class="vm-bottom" aria-label="Связаться с клиникой">
+    {% if va_phone %}<a class="vh-text-link" href="{{ va_phone.url }}" data-help="Открыть приложение для звонка.">Позвонить</a>{% else %}<a class="vh-text-link" href="{% url 'furniture_contacts' %}">Контакты</a>{% endif %}
+    <a class="vh-button" href="#callback" data-help="Перейти к форме обратного звонка.">Записаться</a>
+</nav>
 </main>{% include 'home/includes/vet_footer.html' %}
 {% endblock %}
 {% block global_js %}{% endblock %}
