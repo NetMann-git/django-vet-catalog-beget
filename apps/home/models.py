@@ -93,6 +93,7 @@ class TeamMember(models.Model):
         verbose_name="Порядок вывода",
         help_text="Чем меньше число, тем раньше сотрудник показывается.",
     )
+    is_clinic_doctor = models.BooleanField(default=False, verbose_name="Врач клиники")
     is_published = models.BooleanField(default=True, db_index=True, verbose_name="Опубликован")
     created_at = models.DateTimeField(auto_now_add=True, verbose_name="Создан")
     updated_at = models.DateTimeField(auto_now=True, verbose_name="Изменён")

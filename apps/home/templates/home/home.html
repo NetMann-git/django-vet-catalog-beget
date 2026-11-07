@@ -48,11 +48,19 @@
 <div class="vh-wrap vh-info-grid">
     <section id="team" aria-labelledby="vh-team-title">
         <h2 id="vh-team-title">Люди, которым вы доверяете</h2>
-        <div class="vm-portraits">
-            <img src="{% static 'home/images/approved/doctor-a.png' %}" alt="" width="98" height="87" loading="lazy">
-            <img src="{% static 'home/images/approved/doctor-b.png' %}" alt="" width="99" height="87" loading="lazy">
-        </div>
-        <p class="vm-caption">Демонстрационные фотографии</p>
+        {% if clinic_doctors %}
+        <ul class="vm-doctors">
+            {% for doctor in clinic_doctors %}
+            <li>
+                {% if doctor.image %}<img src="{{ doctor.image.url }}" alt="" width="98" height="87" loading="lazy">{% endif %}
+                <strong>{{ doctor.name }}</strong>
+                <span>{{ doctor.position }}</span>
+            </li>
+            {% endfor %}
+        </ul>
+        {% else %}
+        <p>Карточки врачей появятся после публикации.</p>
+        {% endif %}
     </section>
     <section id="clinic-reviews" aria-labelledby="vh-review-title">
         <h2 id="vh-review-title">Здесь появятся ваши истории</h2>

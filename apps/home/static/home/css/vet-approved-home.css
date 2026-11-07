@@ -35,9 +35,28 @@
 }
 #vh-main .vh-info-grid h2 { font-size: clamp(20px, 2.3vw, 28px); }
 #vh-main .vh-info-grid > section + section { padding-left: 18px; }
-.vm-portraits { display: flex; gap: clamp(10px, 5vw, 78px); }
-.vm-portraits img { border-radius: 10px; }
-#vh-main .vm-caption { margin: 4px 0; font-size: 12px; font-style: italic; }
+.vm-doctors {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 140px), 1fr));
+    gap: 12px;
+    padding: 0;
+    list-style: none;
+}
+.vm-doctors li {
+    padding: 10px;
+    border-radius: 10px;
+    background: #f1e7f1;
+    overflow-wrap: anywhere;
+}
+.vm-doctors img {
+    display: block;
+    object-fit: cover;
+    border-radius: 8px;
+}
+.vm-doctors strong, .vm-doctors span {
+    display: block;
+}
+
 .vm-book {
     display: flex;
     align-items: center;

@@ -101,3 +101,13 @@ class VetHomeTests(TestCase):
         service.is_published = False
         service.save(update_fields=["is_published"])
         self.assertNotContains(self.client.get(url), "УЗИ питомца")
+
+    def test_only_published_clinic_doctors_are_listed(self):
+        TeamMember.objects.create(name="Врач ВетАссист", position="Терапевт", is_clinic_doctor=True)
+        TeamMember.objects.create(name="Черновик врача", position="Терапевт", is_clinic_doctor=True, is_published=False)
+        TeamMember.objects.create(name="Старая команда", position="Менеджер")
+
+        response = self.client.get(reverse("home"))
+        self.assertContains(response, "Врач ВетАссист")
+        self.assertNotContains(response, "Черновик врача")
+        self.assertNotContains(response, "Старая команда")

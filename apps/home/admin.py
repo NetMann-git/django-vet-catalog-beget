@@ -28,10 +28,10 @@ class ClientShowcaseAdmin(admin.ModelAdmin):
 
 @admin.register(TeamMember)
 class TeamMemberAdmin(admin.ModelAdmin):
-    list_display = ("name", "position", "sort_order", "is_published", "updated_at")
-    list_filter = ("is_published",)
+    list_display = ("name", "position", "sort_order", "is_clinic_doctor", "is_published", "updated_at")
+    list_filter = ("is_clinic_doctor", "is_published")
     search_fields = ("name", "position")
-    list_editable = ("sort_order", "is_published")
+    list_editable = ("sort_order", "is_clinic_doctor", "is_published")
 
 
 @admin.register(ContactSettings)

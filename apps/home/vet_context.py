@@ -4,7 +4,7 @@ from django.urls import reverse
 from apps.appointments.forms import CallbackRequestForm
 
 
-from .models import ClinicService
+from .models import ClinicService, TeamMember
 
 
 class VetHomeContextBuilder:
@@ -43,4 +43,8 @@ class VetHomeContextBuilder:
             }
             for label, icon in categories
         ]
-        return {"callback_form": form, "service_shortcuts": shortcuts}
+        return {
+            "callback_form": form,
+            "service_shortcuts": shortcuts,
+            "clinic_doctors": TeamMember.objects.filter(is_clinic_doctor=True, is_published=True),
+        }
