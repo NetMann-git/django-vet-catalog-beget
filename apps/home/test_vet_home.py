@@ -38,6 +38,7 @@ class VetHomeTests(TestCase):
         }, HTTP_X_REQUESTED_WITH='XMLHttpRequest')
         self.assertEqual(response.status_code, 200)
         self.assertTrue(response.json()['success'])
+        self.assertIn('Заявка на обратный звонок принята', response.json()['message'])
         self.assertEqual(CallbackRequest.objects.filter(source='homepage', comment='Вопрос о питомце').count(), 1)
         notify.assert_called_once()
 

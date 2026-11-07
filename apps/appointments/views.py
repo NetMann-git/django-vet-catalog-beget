@@ -229,9 +229,13 @@ def callback_submit(request):
     """Принимает короткую заявку на обратный звонок с главной страницы."""
     is_ajax = request.headers.get('x-requested-with') == 'XMLHttpRequest'
 
+    message = (
+        "Заявка на обратный звонок принята. Администратор позвонит, "
+        "чтобы ответить на вопросы и при необходимости согласовать время приёма."
+    )
+
     # Простое honeypot-поле: обычный посетитель его не видит и не заполняет.
     if request.POST.get('website', '').strip():
-        message = 'Спасибо! Заявка принята. Мы свяжемся с вами в ближайшее время.'
         if is_ajax:
             return JsonResponse({'success': True, 'message': message})
         messages.success(request, message)
@@ -246,7 +250,6 @@ def callback_submit(request):
         # Заявка уже сохранена в БД. Ошибка SMTP не влияет на результат формы.
         _notify_saved_inquiry(callback)
 
-        message = 'Спасибо! Заявка принята. Мы свяжемся с вами в ближайшее время.'
         if is_ajax:
             return JsonResponse({'success': True, 'message': message})
 
