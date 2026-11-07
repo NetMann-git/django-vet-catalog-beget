@@ -22,6 +22,15 @@ class VetHomeContextBuilder:
             ).values_list("name", flat=True).first()
             if name:
                 initial["comment"] = f"Интересует услуга: {name}"
+        doctor_id = request.GET.get("doctor", "")
+        if not initial and len(doctor_id) <= 19 and doctor_id.isascii() and doctor_id.isdecimal():
+            doctor_pk = int(doctor_id)
+            if 0 < doctor_pk <= 2**63 - 1:
+                doctor_name = published_clinic_doctors().filter(
+                    pk=doctor_pk,
+                ).values_list("name", flat=True).first()
+                if doctor_name:
+                    initial["comment"] = f"Хочу уточнить возможность приёма у врача: {doctor_name}"
         form = CallbackRequestForm(initial=initial)
         for name, field in form.fields.items():
             field.widget.attrs["aria-describedby"] = f"callback-{name}-error"

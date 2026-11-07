@@ -112,3 +112,15 @@ class VetHomeTests(TestCase):
             self.assertContains(response, "Врач ВетАссист")
             self.assertNotContains(response, "Черновик врача")
             self.assertNotContains(response, "Старая команда")
+
+    def test_doctor_callback_prefill_requires_public_doctor(self):
+        doctor = TeamMember.objects.create(
+            name="Анна Иванова", position="Ветеринарный врач", is_clinic_doctor=True,
+        )
+        url = reverse("home", query={"doctor": doctor.pk}, fragment="callback")
+        self.assertContains(self.client.get(reverse("clinic_doctors")), f'href="{url}"')
+        self.assertContains(self.client.get(url), "Хочу уточнить возможность приёма у врача: Анна Иванова")
+        doctor.is_published = False
+        doctor.save(update_fields=["is_published"])
+        self.assertNotContains(self.client.get(url), "Анна Иванова")
+        self.assertEqual(self.client.get(reverse("home"), {"doctor": "9" * 100}).status_code, 200)

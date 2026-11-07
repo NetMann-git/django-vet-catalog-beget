@@ -19,6 +19,8 @@
                 <h2>{{ doctor.name }}</h2>
                 <p>{{ doctor.position }}</p>
             </div>
+            <a class="vh-text-link" href="{% url 'home' %}?doctor={{ doctor.pk|slugify }}#callback"
+               data-help="Открыть форму обратного звонка с именем врача в комментарии.">Уточнить возможность приёма</a>
         </article>
         {% endfor %}
     </div>
