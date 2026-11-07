@@ -35,3 +35,21 @@ class VetShellTests(TestCase):
         self.assertContains(response, 'action="' + reverse('users:logout') + '" method="post"')
         self.assertEqual(client.get(reverse('users:logout')).status_code, 405)
         self.assertEqual(client.post(reverse('users:logout')).status_code, 403)
+
+    @override_settings(VET_CLINIC_USE_ADMIN_CONTACTS=True, VET_CLINIC_PHONE='+7 (900) 999-00-00')
+    def test_shell_uses_published_admin_phone(self):
+        from .models import ContactSettings
+
+        record, _ = ContactSettings.objects.update_or_create(pk=1, defaults={
+            'phone_primary': '+7 (900) 111-22-33', 'is_published': True,
+        })
+        for url in ('/', reverse('users:login')):
+            response = self.client.get(url)
+            self.assertContains(response, 'class="va-phone" href="tel:+79001112233"', count=2)
+            self.assertNotContains(response, 'tel:+79009990000')
+
+        record.is_published = False
+        record.save(update_fields=['is_published'])
+        response = self.client.get(reverse('users:login'))
+        self.assertNotContains(response, 'tel:+79001112233')
+        self.assertNotContains(response, 'tel:+79009990000')
