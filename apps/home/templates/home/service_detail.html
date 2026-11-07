@@ -1,0 +1,43 @@
+{% extends 'home/vet_base.html' %}
+{% block title %}{{ service.name }} — ВетАссист{% endblock %}
+{% block seo_meta %}{% if service.summary %}<meta name="description" content="{{ service.summary|truncatechars:160 }}">{% endif %}{% endblock %}
+{% block vet_content %}
+<article class="vh-wrap vs-page vs-detail">
+    <nav class="vs-breadcrumbs" aria-label="Хлебные крошки">
+        <a href="{% url 'home' %}">Главная</a><span aria-hidden="true">/</span>
+        <a href="{% url 'furniture_services' %}" data-help="Вернуться к списку услуг и цен.">Услуги и цены</a>
+        <span aria-hidden="true">/</span><span aria-current="page">{{ service.name }}</span>
+    </nav>
+    <header class="vs-heading">
+        <div>
+            {% if service.group %}<p class="vh-eyebrow">{{ service.group }}</p>{% endif %}
+            <h1>{{ service.name }}</h1>
+            {% if service.summary %}<p>{{ service.summary|linebreaksbr }}</p>{% endif %}
+        </div>
+    </header>
+    <div class="vs-detail-grid">
+        {% if service.description or service.preparation %}
+        <div class="vs-detail-text">
+            {% if service.description %}
+            <section>
+                <h2>Об услуге</h2>
+                {{ service.description|linebreaks }}
+            </section>
+            {% endif %}
+            {% if service.preparation %}
+            <section>
+                <h2>Подготовка к визиту</h2>
+                {{ service.preparation|linebreaks }}
+            </section>
+            {% endif %}
+        </div>
+        {% endif %}
+        <section class="vs-card vs-detail-price" aria-labelledby="service-price-heading">
+            <h2 id="service-price-heading">Стоимость</h2>
+            {% include 'home/includes/vet_service_price.html' %}
+            <a class="vh-button" href="{% url 'home' %}#callback"
+               data-help="Оставить заявку на обратный звонок. Укажите название услуги в комментарии.">Задать вопрос об услуге</a>
+        </section>
+    </div>
+</article>
+{% endblock %}

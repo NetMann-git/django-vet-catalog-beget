@@ -18,3 +18,25 @@
 .vs-pagination{display:flex;align-items:center;justify-content:center;gap:24px;flex-wrap:wrap;margin-top:35px;font-size:15px}.vs-pagination a{min-height:44px;display:inline-flex;align-items:center}
 @media(max-width:1000px){.vs-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.vs-heading{align-items:flex-start;flex-direction:column;gap:10px}}
 @media(max-width:620px){.vs-page{padding-block:22px 45px}.vs-breadcrumbs{margin-bottom:28px}.vs-filters{display:grid;grid-template-columns:1fr;padding:18px;gap:14px}.vs-filters>div:first-child,.vs-filters>div:nth-child(2){min-width:0}.vs-grid{grid-template-columns:1fr;gap:18px}.vs-card{padding:24px}.vs-empty{padding:35px 20px}.vs-empty h2{font-size:30px}.vs-heading h1{font-size:40px}}
+
+.vs-detail {
+    overflow-wrap: anywhere;
+}
+.vs-detail-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+    gap: 32px;
+    align-items: start;
+}
+.vs-detail-text section + section {
+    margin-top: 32px;
+}
+.vs-detail-price {
+    background: #eef2e8;
+    gap: 12px;
+}
+@media (max-width: 760px) {
+    .vs-detail-grid {
+        grid-template-columns: minmax(0, 1fr);
+    }
+}

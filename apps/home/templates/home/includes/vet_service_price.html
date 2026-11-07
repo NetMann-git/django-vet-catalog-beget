@@ -1,0 +1,1 @@
+<p class="vs-price">{% if service.price != None %}{% if service.price_from %}<span>от </span>{% endif %}{{ service.price|floatformat:2 }} ₽{% else %}Стоимость уточняется{% endif %}</p>{% if service.price_note %}<p class="vs-price-note">{{ service.price_note }}</p>{% endif %}

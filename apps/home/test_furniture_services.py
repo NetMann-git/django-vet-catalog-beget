@@ -103,3 +103,16 @@ class ClinicServicesTests(TestCase):
         self.assertContains(response, 'data-help=')
         self.assertContains(response, reverse('home') + '#callback')
         self.assertContains(self.client.get('/sitemap-pages.xml'), self.url)
+
+    def test_detail_supports_cyrillic_and_hides_drafts(self):
+        service = self.service(slug='приём', description='<script>alert(1)</script>',
+                               preparation='Возьмите документы питомца')
+        url = reverse('clinic_service_detail', args=[service.slug])
+        self.assertContains(self.client.get(self.url), url)
+        response = self.client.get(url)
+        self.assertContains(response, 'Возьмите документы питомца')
+        self.assertContains(response, '&lt;script&gt;')
+        self.assertContains(response, 'Стоимость уточняется')
+        service.is_published = False
+        service.save(update_fields=['is_published'])
+        self.assertEqual(self.client.get(url).status_code, 404)
