@@ -36,8 +36,7 @@
 #vh-main .vh-info-grid h2 { font-size: clamp(20px, 2.3vw, 28px); }
 #vh-main .vh-info-grid > section + section { padding-left: 18px; }
 .vm-portraits { display: flex; gap: clamp(10px, 5vw, 78px); }
-.vm-portraits img, .vm-map { border-radius: 10px; }
-.vm-map { display: block; margin-block: 5px; }
+.vm-portraits img { border-radius: 10px; }
 #vh-main .vm-caption { margin: 4px 0; font-size: 12px; font-style: italic; }
 .vm-book {
     display: flex;
@@ -143,4 +142,16 @@
         width: 25px;
         height: 25px;
     }
+}
+
+.vm-contact-details {
+    margin: 8px 0;
+    font-size: 15px;
+}
+.vm-contact-details dt {
+    font-weight: 700;
+}
+.vm-contact-details dd {
+    margin: 0 0 6px;
+    overflow-wrap: anywhere;
 }

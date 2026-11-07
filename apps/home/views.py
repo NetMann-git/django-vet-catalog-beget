@@ -8,6 +8,7 @@ from .vet_context import VetHomeContextBuilder
 
 def home(request):
     context = VetHomeContextBuilder.build(request)
+    context.update(_clinic_contact_context())
     return render(request, "home/home.html", context)
 
 
@@ -42,14 +43,18 @@ def about(request):
     return render(request, "home/about_workshop.html")
 
 
-def contacts(request):
+def _clinic_contact_context():
     from .templatetags.furniture_contacts import public_url
 
-    return render(request, "home/contacts.html", {
+    return {
         "clinic_address": settings.VET_CLINIC_ADDRESS.strip(),
         "clinic_hours": settings.VET_CLINIC_HOURS.strip(),
         "clinic_map_url": public_url(settings.VET_CLINIC_MAP_URL),
-    })
+    }
+
+
+def contacts(request):
+    return render(request, "home/contacts.html", _clinic_contact_context())
 
 
 def portfolio(request):

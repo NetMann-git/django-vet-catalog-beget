@@ -61,9 +61,19 @@
     </section>
     <section id="clinic-contacts" aria-labelledby="vh-contact-title">
         <h2 id="vh-contact-title">Мы рядом</h2>
-        <img class="vm-map" src="{% static 'home/images/approved/map.png' %}" alt="" width="126" height="77" loading="lazy">
+        {% if clinic_address or clinic_hours %}
+        <dl class="vm-contact-details">
+            {% if clinic_address %}<dt>Адрес</dt><dd>{{ clinic_address }}</dd>{% endif %}
+            {% if clinic_hours %}<dt>Часы работы</dt><dd>{{ clinic_hours|linebreaksbr }}</dd>{% endif %}
+        </dl>
+        {% endif %}
         {% if va_phone %}<a class="vh-contact-phone" href="{{ va_phone.url }}" data-help="Открыть приложение для звонка.">{{ va_phone.text }}</a>{% endif %}
-        <a class="vh-text-link" href="{% url 'furniture_contacts' %}" data-help="Открыть адрес, режим работы и ссылку на карту, если они опубликованы.">Как добраться →</a>
+        {% if clinic_map_url %}
+        <img src="{% static 'home/images/approved/map.png' %}" alt="" width="126" height="77" loading="lazy">
+        <a class="vh-text-link" href="{{ clinic_map_url }}" target="_blank" rel="noopener noreferrer" data-help="Открыть карту в новой вкладке.">Как добраться →</a>
+        {% else %}
+        <a class="vh-text-link" href="{% url 'furniture_contacts' %}" data-help="Открыть страницу контактов клиники.">Контакты →</a>
+        {% endif %}
     </section>
 </div>
 <section class="vh-wrap vm-book">
