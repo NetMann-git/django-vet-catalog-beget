@@ -1,0 +1,21 @@
+{% extends 'home/vet_base.html' %}
+{% block title %}{{ doctor.name }} — ВетАссист{% endblock %}
+{% block vet_content %}
+<div class="vh-wrap vs-page">
+    <nav class="vs-breadcrumbs" aria-label="Хлебные крошки">
+        <a href="{% url 'home' %}">Главная</a>
+        <span aria-hidden="true">/</span>
+        <a href="{% url 'clinic_doctors' %}">Врачи</a>
+        <span aria-hidden="true">/</span>
+        <span aria-current="page">{{ doctor.name }}</span>
+    </nav>
+    <article class="vs-card">
+        <h1>{{ doctor.name }}</h1>
+        {% if doctor.image %}
+        <img src="{{ doctor.image.url }}" alt="" width="240" height="240" style="max-width:100%;object-fit:cover;border-radius:12px">
+        {% endif %}
+        <p>{{ doctor.position }}</p>
+        <div><a class="vh-button" href="{{ callback_url }}" data-help="Открыть форму обратного звонка с именем врача.">Уточнить возможность приёма</a></div>
+    </article>
+</div>
+{% endblock %}

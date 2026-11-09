@@ -16,7 +16,7 @@
             <img src="{{ doctor.image.url }}" alt="" width="160" height="160" loading="lazy" style="max-width:100%;object-fit:cover;border-radius:12px">
             {% endif %}
             <div>
-                <h2>{{ doctor.name }}</h2>
+                <h2><a href="{% url 'clinic_doctor_detail' doctor.pk %}" data-help="Открыть карточку врача.">{{ doctor.name }}</a></h2>
                 <p>{{ doctor.position }}</p>
             </div>
             <a class="vh-text-link" href="{% url 'home' %}?doctor={{ doctor.pk|slugify }}#callback"

@@ -17,6 +17,12 @@ def doctors(request):
     return render(request, "home/doctors.html", {"clinic_doctors": published_clinic_doctors()})
 
 
+def doctor_detail(request, pk):
+    doctor = get_object_or_404(published_clinic_doctors(), pk=pk)
+    callback_url = reverse("home", query={"doctor": doctor.pk}, fragment="callback")
+    return render(request, "home/doctor_detail.html", {"doctor": doctor, "callback_url": callback_url})
+
+
 def services(request):
     from .service_catalog import service_context
     return render(request, "home/services.html", service_context(request))

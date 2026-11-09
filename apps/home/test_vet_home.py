@@ -124,3 +124,19 @@ class VetHomeTests(TestCase):
         doctor.save(update_fields=["is_published"])
         self.assertNotContains(self.client.get(url), "Анна Иванова")
         self.assertEqual(self.client.get(reverse("home"), {"doctor": "9" * 100}).status_code, 200)
+
+    def test_doctor_detail_is_public_only_for_published_clinic_doctors(self):
+        doctor = TeamMember.objects.create(
+            name="Врач для карточки", position="Ветеринар", is_clinic_doctor=True,
+        )
+        url = reverse("clinic_doctor_detail", args=[doctor.pk])
+        self.assertContains(self.client.get(reverse("clinic_doctors")), f'href="{url}"')
+        self.assertContains(self.client.get(url), "Врач для карточки")
+        self.assertContains(self.client.get(url), f'?doctor={doctor.pk}#callback')
+        doctor.is_clinic_doctor = False
+        doctor.save(update_fields=["is_clinic_doctor"])
+        self.assertEqual(self.client.get(url).status_code, 404)
+        doctor.is_clinic_doctor = True
+        doctor.is_published = False
+        doctor.save(update_fields=["is_clinic_doctor", "is_published"])
+        self.assertEqual(self.client.get(url).status_code, 404)

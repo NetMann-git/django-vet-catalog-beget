@@ -53,7 +53,7 @@
             {% for doctor in clinic_doctors %}
             <li>
                 {% if doctor.image %}<img src="{{ doctor.image.url }}" alt="" width="98" height="87" loading="lazy">{% endif %}
-                <strong>{{ doctor.name }}</strong>
+                <strong><a href="{% url 'clinic_doctor_detail' doctor.pk %}" data-help="Открыть карточку врача.">{{ doctor.name }}</a></strong>
                 <span>{{ doctor.position }}</span>
             </li>
             {% endfor %}
