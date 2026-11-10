@@ -1,13 +1,13 @@
 {
   "id": "/",
-  "name": "LUSTRID — мебельная мастерская",
-  "short_name": "LUSTRID",
+  "name": "ВетАссист — ветеринарная клиника",
+  "short_name": "ВетАссист",
   "lang": "ru",
   "start_url": "/",
   "scope": "/",
   "display": "browser",
-  "background_color": "#F5F1E8",
-  "theme_color": "#354334",
+  "background_color": "#FFFFFF",
+  "theme_color": "#08085A",
   "icons": [
     {
       "src": "android-chrome-192x192.png",
