@@ -10,9 +10,9 @@ def public_offer(request: HttpRequest) -> HttpResponse:
     """Show ordering information without publishing a contractual offer."""
     response = render(request, 'home/legal/public_offer.html', {
         'page': {
-            'title': 'Условия заказа мебели',
-            'seo_title': 'Условия заказа мебели — LUSTRID.RU',
-            'search_description': 'Обсуждение проекта мебели, материалов, комплектации и изготовления.',
+            'title': 'Как записаться на приём',
+            'seo_title': 'Как записаться на приём — ВетАссист',
+            'search_description': 'Как оставить заявку и согласовать время визита в клинику.',
         },
     })
     response['X-Robots-Tag'] = 'noindex, follow'
@@ -22,8 +22,8 @@ def public_offer(request: HttpRequest) -> HttpResponse:
 def _privacy_document(request: HttpRequest, template: str, title: str) -> HttpResponse:
     """Render an explicitly marked draft without advertising it to search engines."""
     response = render(request, template, {
-        'page': {'title': title, 'seo_title': title + ' — LUSTRID.RU',
-                 'search_description': title + ' сайта lustrid.ru.'},
+        'page': {'title': title, 'seo_title': title + ' — ВетАссист',
+                 'search_description': title + ' сайта vet-asist.ru.'},
     })
     response['X-Robots-Tag'] = 'noindex, follow'
     return response

@@ -17,7 +17,7 @@ urlpatterns = [
     path('apple-touch-icon.png', branding_icon, {'filename': 'apple-touch-icon.png'}, name='apple_touch_icon'),
     path('robots.txt', robots_txt, name='robots_txt'),
     path('sitemap.xml', sitemap_views.index,
-         {'sitemaps': sitemaps, 'sitemap_url_name': 'sitemap_section'}, name='sitemap'),
+         {'sitemaps': {'pages': sitemaps['pages']}, 'sitemap_url_name': 'sitemap_section'}, name='sitemap'),
     path('sitemap-<section>.xml', sitemap_views.sitemap,
          {'sitemaps': sitemaps}, name='sitemap_section'),
     path('admin/', admin.site.urls),

@@ -27,14 +27,12 @@ class FurnitureSitemapTests(TestCase):
 
     def test_index_sections_and_every_listed_page_are_public(self):
         sections = self.locations(reverse('sitemap'))
-        self.assertEqual(set(sections), {'http://testserver/sitemap-pages.xml',
-                                        'http://testserver/sitemap-products.xml',
-                                        'http://testserver/sitemap-brands.xml'})
-        urls = []
-        for section in sections:
-            urls.extend(self.locations(urlsplit(section).path))
-        expected = ['/', reverse('catalog:catalog'), reverse('furniture_services'), reverse('furniture_materials'), reverse('furniture_reviews'), reverse('furniture_about'), reverse('furniture_contacts'), self.product.get_absolute_url(),
-                    self.brand.get_absolute_url(), self.empty_brand.get_absolute_url()]
+        self.assertEqual(sections, ['http://testserver/sitemap-pages.xml'])
+        urls = self.locations(urlsplit(sections[0]).path)
+        expected = [reverse(name) for name in (
+            'home', 'furniture_services', 'furniture_reviews',
+            'furniture_about', 'furniture_contacts', 'clinic_doctors',
+        )]
         self.assertEqual(set(urls), {'http://testserver' + path for path in expected})
         self.assertEqual(len(urls), len(expected))
         for url in urls:
@@ -58,13 +56,9 @@ class FurnitureSitemapTests(TestCase):
         for i in range(4):
             Product.objects.create(title=f'Стол {i}', slug=f'table-{i}', price=10)
         with patch.object(ProductSitemap, 'limit', 2):
-            sections = self.locations(reverse('sitemap'))
-            product_pages = [url for url in sections if '/sitemap-products.xml' in url]
-            self.assertEqual(len(product_pages), 3)
-            urls = []
-            for url in product_pages:
-                parts = urlsplit(url)
-                urls.extend(self.locations(parts.path + ('?' + parts.query if parts.query else '')))
+            url = reverse('sitemap_section', args=['products'])
+            urls = [location for page in range(1, 4)
+                    for location in self.locations(f'{url}?p={page}')]
             self.assertEqual(len(urls), 5)
             self.assertEqual(len(set(urls)), 5)
             self.assertNotIn('http://testserver' + self.hidden.get_absolute_url(), urls)

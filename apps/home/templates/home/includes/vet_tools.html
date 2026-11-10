@@ -1,19 +1,11 @@
-{% load static %}
 <div class="va-tools-grid">
 <nav aria-label="Дополнительные разделы">
-<a href="{% url 'catalog:catalog' %}">Каталог</a>
-<a href="{% url 'catalog:comparison' %}">Сравнение <span id="comparison-count" data-comparison-count>{{ comparison_ids|length }}</span></a>
-<a href="{% url 'wishlist:list' %}">Избранное <span id="wishlist-count" data-wishlist-count>{{ wishlist_count|default:0 }}</span></a>
-<a href="{% url 'catalog:recently_viewed' %}">Недавно смотрели <span id="recently-viewed-count" data-recently-viewed-count>{{ recently_viewed_ids|length }}</span></a>
-<a href="{% url 'furniture_materials' %}">Материалы</a>
-<a href="{% url 'furniture_portfolio' %}">Портфолио</a>
 {% if user.is_authenticated %}<a href="{% url 'users:dashboard' %}">Личный кабинет</a>
 <form action="{% url 'users:logout' %}" method="post">{% csrf_token %}<button type="submit">Выйти</button></form>
 {% else %}<a href="{% url 'users:login' %}">Войти</a>{% endif %}
 </nav>
-<form class="va-search" action="{% url 'catalog:catalog' %}" method="get" data-smart-search>
-<label for="va-search-input">Поиск по каталогу</label>
-<div class="va-search-row"><input id="va-search-input" name="q" type="search" placeholder="Название или артикул" autocomplete="off" data-smart-search-input><button type="submit">Найти</button></div>
-<div class="search-results" data-search-results style="display:none;"></div>
+<form class="va-search" action="{% url 'furniture_services' %}" method="get">
+<label for="va-search-input">Поиск по услугам</label>
+<div class="va-search-row"><input id="va-search-input" name="q" type="search" placeholder="Название услуги"><button type="submit">Найти</button></div>
 </form>
 </div>
